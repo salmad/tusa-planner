@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Quenty</title>
+<!-- Custom styles for this page -->
+<link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class=" col-lg-6 h3 mb-0 text-gray-800">My searches</h1>
+<a class="btn btn-primary" href="/?search_index={{searches.loc[0, 'index']}}">Back to my recent search &#8594;</a>
+
+</div>
+
+
+<p class="mb-4">Here are your last 10 searches. Click on link search to take a look at its results</p>
+
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Border Left Utilities -->
+    <div class="col-lg-6">
+
+        {% for j in (searches.iloc[:5].index) %}
+        <div class="card mb-4 py-3 border-bottom-info">
+            <div class="card-body">
+                <a href="/?search_index={{searches.loc[j, 'index']}}">Search #{{j}}</a> for project <a href="/projects/{{searches.loc[j, 'project_name']}}">#{{searches.loc[j, 'project_name']}}</a><br>
+                <b>Companies:</b> {{searches.loc[j, 'company']}}
+                <br>
+                <b>Experiences:</b> {{searches.loc[j, 'experience']}}
+                <br>
+                <b>Jobs:</b> {{searches.loc[j, 'job']}}
+                <br>
+                <b>Skills:</b> {{searches.loc[j, 'skill']}}
+                <br>
+                <b>Licenses:</b> {{searches.loc[j, 'licenses']}}
+            </div>
+        </div>
+        {%endfor%}
+
+    </div>
+
+    <!-- Border Bottom Utilities -->
+    <div class="col-lg-6">
+
+         {% for j in (searches.iloc[5:10].index) %}
+        <div class="card mb-4 py-3 border-bottom-info">
+            <div class="card-body">
+                <a href="/?search_index={{searches.loc[j, 'index']}}">Search #{{j}}</a> for project <a href="/projects/{{searches.loc[j, 'project_name']}}">#{{searches.loc[j, 'project_name']}}</a><br>
+                <b>Companies:</b> {{searches.loc[j, 'company']}}
+                <br>
+                <b>Experiences:</b> {{searches.loc[j, 'experience']}}
+                <br>
+                <b>Jobs:</b> {{searches.loc[j, 'job']}}
+                <br>
+                <b>Skills:</b> {{searches.loc[j, 'skill']}}
+                <br>
+                <b>Licenses:</b> {{searches.loc[j, 'licenses']}}
+            </div>
+        </div>
+        {%endfor%}
+
+    </div>
+
+</div>
+
+{% endblock %}
+

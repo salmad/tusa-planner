@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Quenty</title>
+<!-- Custom styles for this page -->
+<link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class=" col-lg-6 h3 mb-0 text-gray-800">My projects</h1>
+    <a class="btn btn-primary" href="/">Back to search &#8594;</a>
+
+</div>
+
+
+<p class="mb-4">Here are your projects. Click on project link to get candidates</p>
+
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Border Left Utilities -->
+    <div class="col-lg-4">
+
+        {% for j in [0,3,6,9] %}
+        {% if j < projects|length%}
+        <div class="card mb-4 py-3 border-bottom-success">
+
+            <div class="card-body">
+                <div class="float-md-right ">
+                    <!--                        <i class="fas fa-file-excel fa-2x text-gray-300"></i>-->
+                    <a href="/download_cand_sheet/{{projects.loc[j, 'project_name']}}"><i
+                            class="fas fa-download fa-2x text-success-600"></i></a>
+                </div>
+                {{j+1}}: Project <a href="/projects/{{projects.loc[j, 'project_name']}}">#{{projects.loc[j,
+                'project_name']}}</a>
+                <br>
+                <b>Number of candidates:</b> {{projects.loc[j, 'n_candidates']}}
+                <br>
+                <b>Last update:</b> {{projects.loc[j, 'last_update'].strftime('%d %b %Y, %H:%M') }}
+
+            </div>
+
+        </div>
+        {%else%}
+        {%endif%}
+        {%endfor%}
+
+
+    </div>
+
+    <div class="col-lg-4">
+
+        {% for j in [1,4,7,10] %}
+        {% if j < projects|length%}
+        <div class="card mb-4 py-3 border-bottom-success">
+            <div class="card-body">
+                <div class="float-md-right ">
+                    <!--                        <i class="fas fa-file-excel fa-2x text-gray-300"></i>-->
+                    <a href="/download_cand_sheet/{{projects.loc[j, 'project_name']}}"><i
+                            class="fas fa-download fa-2x text-success-600"></i></a>
+                </div>
+
+                {{j+1}}: Project <a href="/projects/{{projects.loc[j, 'project_name']}}">#{{projects.loc[j,
+                'project_name']}}</a>
+                <br>
+                <b>Number of candidates:</b> {{projects.loc[j, 'n_candidates']}}
+                <br>
+                <b>Last update:</b> {{projects.loc[j, 'last_update'].strftime('%d %b %Y, %H:%M') }}
+            </div>
+        </div>
+        {%else%}
+        {%endif%}
+        {%endfor%}
+
+
+    </div>
+
+    <div class="col-lg-4">
+
+        {% for j in [2,5,8,11] %}
+        {% if j < projects|length%}
+        <div class="card mb-4 py-3 border-bottom-success">
+            <div class="card-body">
+                <div class="float-md-right ">
+                    <!--                        <i class="fas fa-file-excel fa-2x text-gray-300"></i>-->
+                    <a href="/download_cand_sheet/{{projects.loc[j, 'project_name']}}"><i
+                            class="fas fa-download fa-2x text-success-600"></i></a>
+                </div>
+
+                {{j+1}}: Project <a href="/projects/{{projects.loc[j, 'project_name']}}">#{{projects.loc[j,
+                'project_name']}}</a>
+                <br>
+                <b>Number of candidates:</b> {{projects.loc[j, 'n_candidates']}}
+                <br>
+                <b>Last update:</b> {{projects.loc[j, 'last_update'].strftime('%d %b %Y, %H:%M') }}
+            </div>
+        </div>
+        {%else%}
+        {%endif%}
+        {%endfor%}
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+

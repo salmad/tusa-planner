@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Tusa</title>
+<!-- Custom styles for this page -->
+<link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class=" col-lg-6 h3 mb-0 text-gray-800">Event: {{event_info.loc[0, 'name']}}
+        <!--        <a href="#">#{{search['id']}}</a>, # of candidates in project <a href="#">{{cand_list|length}}</a>-->
+    </h1>
+
+    <a class="btn btn-primary" href="/">Back to event board &#8594;</a>
+
+</div>
+
+
+
+
+<!-- Content Row -->
+<!--card shadow mb-4-->
+<div class="row">
+
+
+<!--    <div class="col-lg-1">-->
+<!--    </div>-->
+    <div class="col-lg-6">
+        <div class="card mb-4 py-3 border-left-primary">
+            <div class="card-body">
+            <p class="mb-2 h3">Event details</p>
+        <table class="table "  width="90%" cellspacing="0">
+            <tr>
+                <td style="text-align:center">
+                    <img height="70" src="../static/img/time.svg" alt=""> <br><br>
+                    <b>Date</b>
+                </td>
+                <td style="vertical-align:middle ">
+                    {{event_info.loc[0, 'event_date']}}
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align:center">
+                    <img height="70" src="../static/img/undraw_my_location_re_r52x.svg" alt=""> <br><br>
+                    Venue
+                </td>
+                <td style="vertical-align:middle ">
+                    {{event_info.loc[0, 'venue']}}
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align:center">
+                    <img height="70" src="../static/img/undraw_gaming_re_cma2.svg" alt=""> <br><br>
+                    Category
+                </td>
+                <td style="vertical-align:middle ">
+                    {{event_info.loc[0, 'event_type']}}
+                </td>
+            </tr>
+        </table>
+        </div>
+        </div>
+        <a href="/update_event/{{event_info.loc[0, 'id']}}" class="btn btn-secondary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                                        <span class="text">Update event</span>
+                                    </a>
+
+    </div>
+
+
+
+    <div class="col-lg-6">
+        <div class="card mb-4 py-3 border-left-primary">
+            <div class="card-body">
+                <p class="mb-4 h3">Respones to event</p>
+                <!-- Border Left Utilities -->
+                <div class="table-responsive">
+
+
+                    <!--table-bordered-->
+                    <table class="table " id="" width="90%" cellspacing="0">
+                        <thead>
+                        <tr id="col_responses">
+                            <th>Attendee name</th>
+                            <th>Response</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ix in attendees.index %}
+
+                        <tr id="{{attendees.loc[ix, 'attendee']}}">
+
+                            <!--Name column-->
+                            <td>
+                                <div id="{{attendees.loc[ix, 'attendee']}}_name">{{ attendees.loc[ix, 'attendee']}}
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <div id="{{attendees.loc[ix, 'attendee']}}_attendance_status">{{ attendees.loc[ix,
+                                    'attendance_status']}}
+                                </div>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
+

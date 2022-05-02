@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>AlAthletes parties</title>
+<!-- Custom styles for this page -->
+<link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block body %}
+
+<!-- Page Heading -->
+
+<div class="row">
+    <div class="col-lg-10">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Event board</h1>
+
+            <!--    {%if cand_list|length < 1%}-->
+            <!--    <div class="icon-circle bg-warning">-->
+            <!--        <i class="fas fa-exclamation-triangle text-white"></i>-->
+            <!--    </div>-->
+            <!--    <div class="alert info">Please, wait until search finishes. It may take a while, especially if several combinations-->
+            <!--        should be executed. </div>-->
+            <!--    {%endif%}-->
+
+
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <a class="btn btn-primary btn-icon-split" href="/create_event">
+            <span class="icon text-white-50"><i class="fas fa-plus"></i></span>
+            <span class="text">Create event</span>
+        </a>
+        <!--        <a class="btn btn-primary" href="/add_event">Create event &#8594;</a>-->
+
+    </div>
+</div>
+<!-- Page Heading -->
+<!--                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>-->
+<!--                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.-->
+<!--                        For more information about DataTables, please visit the <a target="_blank"-->
+<!--                            href="https://datatables.net">official DataTables documentation</a>.</p>-->
+
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <!--                            {{cand_list.to_html()|safe}}-->
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+
+                <tr id="col_cand_list">
+
+                    <th>{{rename_dict['name']}}</th>
+                    {% for col in cand_list.columns.values if col not in ['id','name', 'timestamp', 'attendance_status'] %}
+                    <th>{{rename_dict[col]}}</th>
+                    {% endfor %}
+                    <th>{{rename_dict['attendance_status']}}</th>
+                    <!--                    <th style="display:none">{{rename_dict['search_names']}}</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                {% for ix in cand_list.index %}
+
+                <tr id="{{cand_list.loc[ix, 'id']}}">
+
+                    <td id="{{cand_list.loc[ix, 'id']}}_name">
+                        <a href="/events/{{cand_list.loc[ix, 'id']}}"> {{cand_list.loc[ix, 'name']}} </a>
+                    </td>
+
+                    {% for col in cand_list.columns.values if col not in ['id', 'name', 'timestamp', 'attendance_status'] %}
+
+                    <td id="{{cand_list.loc[ix, 'id']}}_{{col}}">
+                        {{cand_list.loc[ix, col]}}
+                    </td>
+                    {% endfor %}
+                    <td id="{{cand_list.loc[ix, 'id']}}_td">
+                        <!--                       <button onclick="add_cand()" name="{{cand_list.loc[ix, 'id']}}" class="btn btn-success btn-circle ">-->
+                        <!--                   <i class="fas fa-check"></i>-->
+                        <!--                   </button>-->
+
+                        <div style="display:none;">{% if cand_list.loc[ix,'attendance_status']=='yes' %} y
+                            {% elif cand_list.loc[ix,'attendance_status']=='no' %} n
+                            {% else %}
+                            t{% endif %}
+                        </div>
+                        <select name="{{cand_list.loc[ix, 'id']}}" id="{{cand_list.loc[ix, 'id']}}_select"
+                                onchange="update_attendee()" class="form-select btn
+                        {% if cand_list.loc[ix,'attendance_status']=='yes' %} btn-success
+                        {% elif cand_list.loc[ix,'attendance_status']=='no' %} btn-danger
+                        {% else %}
+                        btn-info
+                        {% endif %}
+                        " aria-label="attendance">
+                            <option>TBD</option>
+                            <option value="yes" {% if cand_list.loc[ix,
+                            'attendance_status']=='yes' %} selected {% endif %}>Yes</option>
+                            <option value="no" {% if cand_list.loc[ix,
+                            'attendance_status']=='no' %} selected {% endif %}>No</option>
+                        </select>
+
+                        <!--                   <button onclick="add_cand()" name="{{cand_list.loc[ix, 'id']}}" class="btn btn-danger btn-circle">-->
+                        <!--                   <i class="fas fa-times"></i>-->
+                        <!--                   </button>-->
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+{% endblock %}
+

@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>AlAthletes parties</title>
+<!-- Custom styles for this page -->
+<link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block body %}
+
+<!-- Page Heading -->
+
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+        {% if search['post_type']=='update' %} Change {%else%} New {%endif%}
+        event</h1>
+
+    <!--    {%if cand_list|length < 1%}-->
+    <!--    <div class="icon-circle bg-warning">-->
+    <!--        <i class="fas fa-exclamation-triangle text-white"></i>-->
+    <!--    </div>-->
+    <!--    <div class="alert info">Please, wait until search finishes. It may take a while, especially if several combinations-->
+    <!--        should be executed. </div>-->
+    <!--    {%endif%}-->
+
+
+</div>
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+<form action="/{% if search['post_type']=='update' %}{{search['id']}}{%else%}{%endif%}" method="post" id="search_form">
+    <div class="card card-2">
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <b>Event name:</b> <input
+                        class="card mb-4 border-left-primary form-control  text-gray-900  bg-light border-0 small"
+                        placeholder="Name your cool event..." minlength="4"
+                        name="event_name" value="{{search['name']}}" required>
+                    <!--                                            <div style="display: flex; justify-content: flex-end">-->
+
+                    <!--                                            </div>-->
+                </div>
+                <div class="col-lg-6">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <span> You can define the place afterwards </span>
+    <br><br>
+    <div class="row">
+
+        <!-- Border Left Utilities -->
+        <div class="col-lg-6">
+
+
+            <b> When:</b>
+            <input class="mb-4 border-left-primary form-control  small" type="datetime-local"
+                   name="event_date" value="{{search['event_date_formatted']}}">
+
+
+            <b>Event category: </b><input
+                class="mb-4 border-left-primary form-control  small"
+                placeholder="E.g. karaoke, board games or corporate event "
+                name="event_type" value="{{search['event_type']}}">
+
+        </div>
+
+        <!-- Border Bottom Utilities -->
+        <div class="col-lg-6">
+
+            <b>Venue:</b> <input
+                class="card mb-4 border-left-primary form-control small"
+                placeholder="You can fill it in later"
+                name="venue" value="{{search['venue']}}">
+
+            <b>Description: </b><input
+                class="card mb-4 border-left-primary form-control small"
+                placeholder="..."
+                name="description" value="{{search['description']}}">
+
+        </div>
+
+    </div>
+                 <button type="submit" class="btn btn-primary btn-icon-split">
+                                                            <span class="icon text-white-50">
+                                                                <i class="fas fa-plus"></i>
+                                                            </span>
+                        <span class="text">
+                            {% if search['post_type']=='update' %} Update {%else%} Create {%endif%}
+                            event</span>
+                    </button>
+</form>
+
+
+<!--<iframe name="frame"></iframe>-->
+
+
+{% endblock %}
+

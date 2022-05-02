@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Welcome to Salim's todo-list</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-1">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <h2 class="title">Registration Info</h2>
+                <form action="/">
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="PROJECT ID, E.G. SBER1"
+                               name="project_id">
+                    </div>
+
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="COMPANY" name="employer">
+                    </div>
+
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="POSITION" name="position">
+                    </div>
+
+                    <div class="input-group">
+                        <input class="input--style-1" type="text" placeholder="EXPERIENCE REQUIREMENT"
+                               name="experience_len">
+                    </div>
+
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <input class="input--style-1" type="text" placeholder="REGISTRATION CODE"
+                                       name="res_code">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-t-20">
+                        <button class="btn btn--radius btn--green" type="submit">Create project</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
