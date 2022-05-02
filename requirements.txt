@@ -33,6 +33,7 @@ pydantic
 PyJWT
 pyparsing
 python-dateutil
+python-multipart
 pytz
 requests
 search-engine-parser
