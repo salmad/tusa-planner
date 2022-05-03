@@ -180,7 +180,7 @@ async def update_event(event_id: str, request: Request, user=Depends(manager)):
                                       context={'request': request, 'search': search,
                                                'rename_dict': rename_dict})
 
-@app.post('/{event_id}')
+@app.post('/change_event/{event_id}')
 async def change_event(event_id:str,request: Request, user=Depends(manager)):
     changed_event = {**await request.form()}
     print(changed_event)
